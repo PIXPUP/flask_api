@@ -1,11 +1,10 @@
-import random
 import sqlalchemy
 from table import ctm
 from salt import generate_salt
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 from werkzeug.security import generate_password_hash,check_password_hash
-from flask import Flask, request, render_template
+from flask import Flask, request
 
 app = Flask(__name__)
 books=[]
