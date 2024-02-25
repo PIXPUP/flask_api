@@ -1,0 +1,6 @@
+python == 3.8.18
+SQLAlchemy == 2.0.27
+Werkzeug == 3.0.1
+Flask == 3.0.0
+Flask-RESTful == 0.3.10
+Flask-SQLAlchemy == 3.1.1

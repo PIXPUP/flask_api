@@ -5,7 +5,7 @@ from salt import generate_salt
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 from werkzeug.security import generate_password_hash,check_password_hash
-from flask import Flask, request
+from flask import Flask, request, render_template
 
 app = Flask(__name__)
 books=[]
