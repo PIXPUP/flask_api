@@ -1,20 +1,10 @@
-import sqlalchemy
-from table import ctm
 from salt import gen_pass
 from dbsystem import database_system
-from sqlalchemy.orm import sessionmaker
-from sqlalchemy.ext.declarative import declarative_base
 from werkzeug.security import generate_password_hash,check_password_hash
 from flask import Flask, request
 
 app = Flask(__name__)
 books=[]
-
-Base = declarative_base()
-engine = sqlalchemy.create_engine('sqlite:///ctm.db')
-Base.metadata.create_all(engine)
-sm = sessionmaker(engine)
-session = sm()
 
 @app.route("/register",methods=['POST'])
 def register():

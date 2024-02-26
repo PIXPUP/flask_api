@@ -1,7 +1,7 @@
 import random
 from werkzeug.security import generate_password_hash
 
-class password_system:
+class gen_pass:
     def saltting(password):
         chars = []
         ALPHABET = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$^&*_-+=?;:'"
