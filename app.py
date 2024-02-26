@@ -18,6 +18,7 @@ def register():
         return f'Wellcome {username}'
     except:
          return 'username was taken'
+    
 @app.route("/login",methods=['POST'])
 def login():
     try:
