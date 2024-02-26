@@ -1,7 +1,6 @@
 import sqlalchemy
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
-from werkzeug.security import generate_password_hash,check_password_hash
 
 Base = declarative_base()
 
