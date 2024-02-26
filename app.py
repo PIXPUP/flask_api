@@ -8,14 +8,16 @@ books=[]
 
 @app.route("/register",methods=['POST'])
 def register():
-    j_req = request.json
-    username = j_req['Username']
-    password = j_req['Password']
-    email = j_req['Email']
-    salt,pass_hash = gen_pass.saltting(password)
-    database_system.savedata(username,pass_hash,email,salt)
-    return f'Wellcome {username}'
-
+    try:
+        j_req = request.json
+        username = j_req['Username']
+        password = j_req['Password']
+        email = j_req['Email']
+        salt,pass_hash = gen_pass.saltting(password)
+        database_system.savedata(username,pass_hash,email,salt)
+        return f'Wellcome {username}'
+    except:
+         return 'username was taken'
 @app.route("/login",methods=['POST'])
 def login():
             try:
@@ -42,7 +44,7 @@ def ChangePassword():
             j_req = request.get_json()
             if check_password_hash(user.Password,user.Salt+old_password):
                 database_system.updata_data(username,new_user)
-                return 'change password succeed'
+                return 'change password success'
             else:
                 return 'password is incorrect'
         except:
