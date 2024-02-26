@@ -18,39 +18,36 @@ session = sm()
 @app.route("/register",methods=['POST'])
 def register():
     try:
-        if request.method =='POST':
-            j_req = request.json
-            username = j_req['Username']
-            password = j_req['Password']
-            email = j_req['Email']
-            salt = generate_salt.saltting()
-            prehash = salt+password
-            pass_hash = generate_password_hash(prehash)
-            member1 = ctm(Username=username,Password=pass_hash,Email=email,Salt=salt)
-            session.add(member1)
-            session.commit()
+        j_req = request.json
+        username = j_req['Username']
+        password = j_req['Password']
+        email = j_req['Email']
+        salt = generate_salt.saltting()
+        prehash = salt+password
+        pass_hash = generate_password_hash(prehash)
+        member1 = ctm(Username=username,Password=pass_hash,Email=email,Salt=salt)
+        session.add(member1)
+        session.commit()
         return f'Wellcome {username}'
     except:
         return 'username is already taken'
 
 @app.route("/login",methods=['POST'])
 def login():
-        if request.method =='POST':
-            try:
-                j_req = request.json
-                username = j_req['Username']
-                password = j_req['Password']
-                user = session.query(ctm).filter(ctm.Username == username).first()
-                if check_password_hash(user.Password,user.Salt+password):
-                    return f'Hello, {username}'
-                else:
-                    return 'Password is incorrect'
-            except:
-                return 'username is not found'
+        try:
+            j_req = request.json
+            username = j_req['Username']
+            password = j_req['Password']
+            user = session.query(ctm).filter(ctm.Username == username).first()
+            if check_password_hash(user.Password,user.Salt+password):
+                return f'Hello, {username}'
+            else:
+                return 'Password is incorrect'
+        except:
+            return 'username is not found'
 
 @app.route("/ChangePassword",methods=['PUT'])
 def ChangePassword():
-    if request.method == 'PUT':
         try:
             j_req = request.json
             username = j_req['Username']
@@ -71,18 +68,17 @@ def ChangePassword():
 @app.route("/DeleteAccount",methods=['DELETE'])
 def delete_account():
     try:
-        if request.method == 'DELETE':
-            j_req = request.json
-            username = j_req['Username']
-            password = j_req['Password']
-            user = session.query(ctm).filter(ctm.Username == username).first()
-            if check_password_hash(user.Password,user.Salt+password):
-                del_user = session.query(ctm).filter(ctm.Username==username).first()
-                session.delete(del_user)
-                session.commit()
-                return 'Delete Success'
-            else:
-                return 'Password is incorrect'
+        j_req = request.json
+        username = j_req['Username']
+        password = j_req['Password']
+        user = session.query(ctm).filter(ctm.Username == username).first()
+        if check_password_hash(user.Password,user.Salt+password):
+            del_user = session.query(ctm).filter(ctm.Username==username).first()
+            session.delete(del_user)
+            session.commit()
+            return 'Delete Success'
+        else:
+            return 'Password is incorrect'
     except:
         return 'username is not found'
     
