@@ -1,13 +1,13 @@
 import random
+from werkzeug.security import generate_password_hash
 
-class generate_salt:
-    def saltting():
+class password_system:
+    def saltting(password):
         chars = []
         ALPHABET = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$^&*_-+=?;:'"
         for i in range(20):
             chars.append(random.choice(ALPHABET))
-        r ="".join(chars)
+        salt ="".join(chars)
+        pass_hash = generate_password_hash(salt+password)
         chars=[]
-        return r
-
-generate_salt.saltting()
+        return salt,pass_hash
